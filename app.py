@@ -5,9 +5,9 @@ from sqlalchemy import create_engine, text
 
 st.set_page_config(page_title="Startup Funding Dashboard", layout="wide")
 
-# --- Database connection ---
-engine = create_engine("mysql+pymysql://root:@localhost/startup_funding")
-
+ # --- Database connection ---
+db = st.secrets["mysql"]
+engine = create_engine(f"mysql+pymysql://{db['user']}:{db['password']}@{db['host']}:{db['port']}/{db['database']}")
 # --- Helper: get filter options directly from DB ---
 @st.cache_data
 def get_options():
